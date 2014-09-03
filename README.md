@@ -20,7 +20,7 @@ _requires user approval_
 ```
 
 **Saving a password in Safari AutoFill**
-_requires user approval if this username is already in Safari AutoFill_
+_requires user approval if editing an existing credential_
 ```objective-c
 [MUSharedWebCredential saveCredentialWithUsername:username
                                          password:password
