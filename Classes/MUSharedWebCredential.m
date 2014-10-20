@@ -32,11 +32,12 @@ const NSInteger MUSharedWebCredentialNotSupportedErrorCode = 9001;
         return;
     }
     SecRequestSharedWebCredential((__bridge CFStringRef)domain, (__bridge CFStringRef)username,
-        ^(CFArrayRef credentials, CFErrorRef error) {
+        ^(CFArrayRef credentials, CFErrorRef _error) {
+            NSError *error = (__bridge NSError *)_error;
             if (error) {
                 if (failure) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        failure((__bridge NSError *)error);
+                        failure(error);
                     });
                 }
                 return;
@@ -57,7 +58,7 @@ const NSInteger MUSharedWebCredentialNotSupportedErrorCode = 9001;
             else {
                 if (failure) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        failure((__bridge NSError *)error);
+                        failure(error);
                     });
                 }
             }
@@ -83,10 +84,11 @@ const NSInteger MUSharedWebCredentialNotSupportedErrorCode = 9001;
         return;
     }
     SecAddSharedWebCredential((__bridge CFStringRef)domain, (__bridge CFStringRef)username, (__bridge CFStringRef)password,
-        ^(CFErrorRef error) {
+        ^(CFErrorRef _error) {
+            NSError *error = (__bridge NSError *)_error;
             if (completion) {
               dispatch_async(dispatch_get_main_queue(), ^{
-                  completion((__bridge NSError *)error);
+                  completion(error);
               });
             }
         });
