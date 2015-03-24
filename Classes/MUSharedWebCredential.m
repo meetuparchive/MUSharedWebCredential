@@ -35,8 +35,9 @@ const NSInteger MUSharedWebCredentialNotSupportedErrorCode = 9001;
         ^(CFArrayRef credentials, CFErrorRef error) {
             if (error) {
                 if (failure) {
+                    NSError *failError = (__bridge NSError *)error;
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        failure((__bridge NSError *)error);
+                        failure(failError);
                     });
                 }
                 return;
@@ -56,8 +57,9 @@ const NSInteger MUSharedWebCredentialNotSupportedErrorCode = 9001;
             }
             else {
                 if (failure) {
+                    NSError *failError = (__bridge NSError *)error;
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        failure((__bridge NSError *)error);
+                        failure(failError);
                     });
                 }
             }
